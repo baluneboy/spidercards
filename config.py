@@ -81,4 +81,19 @@ def init(screen_size=(800, 600)):
         n = 13
         ncards = 4*n
         xoffset = 123
-        yoffset = -34        
+        yoffset = -34
+
+    elif screen_size == (1920, 1080):
+        w = 1024
+        h = 768
+        card_w = 79
+        card_h = 123
+        path = "images/1024x768/"  # FIXME wrong dimensions
+        hidden_card_filename = 'images/1024x768/hidden.gif'  # FIXME wrong dimensions
+        suits = ['c', 'd', 'h', 's']
+        n = 13
+        ncards = 4*n
+        xoffset = 123
+        yoffset = 54
+
+    # print 'screen_size ', screen_size

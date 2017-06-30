@@ -11,7 +11,7 @@ from pygame.locals import *
 from copy import copy
 from operator import itemgetter
 
-import Image, ImageOps, ImageDraw, ImageFont, ImageEnhance
+from PIL import Image, ImageOps, ImageDraw, ImageFont, ImageEnhance
 from collections import deque
 import numpy as np
 
@@ -312,7 +312,7 @@ class Trick(object):
             s = 'c'
         self.spidercard = SpiderCard(n, s, config.path + '{0:02}{1}.gif'.format(n, s))
         #self.spidercard.set_fav_letter('K')
-        self.spidercard.set_position(self.posx, 2*self.posx+2.5*config.card_h)
+        self.spidercard.set_position(self.posx, 2*self.posx+2.0*config.card_h)
         self.spidercard.set_as_mine()        
         self.mycards.add(self.spidercard)
         self.sprites.add(self.spidercard)
@@ -323,7 +323,7 @@ class Trick(object):
         n,s = 13,'h'
         self.ladybugcard = LadybugCard(n, s, config.path + '{0:02}{1}.gif'.format(n, s))
         self.ladybugcard.set_fav_letter(self.fav_letter)
-        self.ladybugcard.set_position(1.5*self.posx, 2*self.posx+2.5*config.card_h)
+        self.ladybugcard.set_position(1.5*self.posx, 2*self.posx+2.0*config.card_h)
         self.mycards.add(self.ladybugcard)
         self.sprites.add(self.ladybugcard)
         self.table.add(self.ladybugcard)    
@@ -852,17 +852,29 @@ if __name__ == '__main__':
         print 'Usage: game.py <video_mode>, where <video_mode> is:'
         print '     -a   for 800x600 << DO NOT USE THIS (it will error)'
         print '     -b   for 1024x768 (default)'
+        print '     -c   for 1920x1080 (Win10 laptop)'
         sys.exit(0)
 
     if '-a' in sys.argv:
         raise Exception('no longer supporting 800x600')
+    elif '-c' in sys.argv:
+        # FIXME this was not optimized (just placeholder for now)
+        config.init((1920, 1080))
+        config.suits = ['c', 'd', 'h']
+        config.n = 10
+        config.ncards = 3*config.n
+        config.xoffset = 0
+        config.yoffset = 22
     else:
         config.init((1024, 768))
         config.suits = ['c', 'd', 'h']
         config.n = 10
         config.ncards = 3*config.n
         config.xoffset = 0
-        config.yoffset = 44
+        config.yoffset = 22
+
+    import os
+    os.environ['SDL_VIDEO_CENTERED'] = '1'
 
     trick = Trick()
     trick.pick_fav_letter()
