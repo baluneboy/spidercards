@@ -98,15 +98,33 @@ def font_demo():
     print 'wrote %s' % fname_out
 
 
+def center_window_demo():
+    x = 100
+    y = 0
+    import os
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "%d,%d" % (x, y)
+    os.environ['SDL_VIDEO_CENTERED'] = '1'
+
+    import pygame
+    pygame.init()
+    screen = pygame.display.set_mode((100, 100))
+
+    # wait for a while to show the window.
+    import time
+    time.sleep(5)
+
+
 if __name__ == '__main__':
 
     # # run font demo
     # font_demo()
 
-    # run overlay demo
-    n = range(1,14)
-    suits = ['c','d','s','h']
-    for s in suits[0]:
-        for n in range(11,12):
-            im = overlay_demo('%02d%s.gif' % (n,s), 0, n+14)
-            im.show()
+    # # run overlay demo
+    # n = range(1,14)
+    # suits = ['c','d','s','h']
+    # for s in suits[0]:
+    #     for n in range(11,12):
+    #         im = overlay_demo('%02d%s.gif' % (n,s), 0, n+14)
+    #         im.show()
+
+    center_window_demo()
