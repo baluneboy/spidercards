@@ -11,7 +11,7 @@ from pygame.locals import *
 from copy import copy
 from operator import itemgetter
 
-import Image, ImageOps, ImageDraw, ImageFont, ImageEnhance
+from PIL import Image, ImageOps, ImageDraw, ImageFont, ImageEnhance
 from collections import deque
 import numpy as np
 
